@@ -6,7 +6,7 @@ body {
 }
 
 body {
-  background: #57842e;
+  background: #d89048;
   font-family: "Courier New", Courier, monospace;
 }
 
@@ -54,9 +54,9 @@ button:hover {
 
 .Present {
   position: absolute;
-  height: 32px;
-  width: 30px;
-  font-size: 24px;
+  height: 42px;
+  width: 40px;
+  font-size: 42px;
 
   animation-timing-function: linear;
   animation-duration: 3s;

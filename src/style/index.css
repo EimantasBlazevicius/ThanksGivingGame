@@ -1,0 +1,127 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+}
+
+body {
+  background: #57842e;
+  font-family: "Courier New", Courier, monospace;
+}
+
+button {
+  transition: all 0.3s ease-out;
+  font-size: 44px;
+  font-weight: 700;
+  padding: 10px 30px;
+  background: #fbbd05;
+  border-radius: 7px;
+  color: rgba(255, 255, 255, 0.8);
+  border-color: #fbbd05;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #fff;
+  color: rgba(251, 189, 5, 0.8);
+}
+
+#app {
+  height: 100vh;
+  padding: 100px 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+@keyframes travel {
+  from {
+    left: 100vw;
+  }
+
+  to {
+    left: 0;
+  }
+}
+
+.Christmas-tree {
+  font-size: 100px;
+  height: 108px;
+  width: 52px;
+  left: 8%;
+  position: absolute;
+}
+
+.Present {
+  position: absolute;
+  height: 32px;
+  width: 30px;
+  font-size: 24px;
+
+  animation-timing-function: linear;
+  animation-duration: 3s;
+  animation-name: travel;
+}
+
+.Board {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+}
+
+.Score,
+.Timer {
+  color: #fff;
+  flex: 1;
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.Overlay,
+.Overlay__column {
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Overlay__column {
+  flex-direction: column;
+}
+
+.Finish p {
+  color: #fff;
+  font-size: 44px;
+  line-height: 68px;
+  font-weight: 700;
+  text-align: center;
+  padding: 0 20vw;
+}
+
+.Mobile-controls {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+}
+
+.Mobile-controls--button {
+  padding: 0;
+  background: transparent;
+  border-width: 0px;
+  line-height: 40px;
+  margin: 10px;
+  outline: transparent;
+}

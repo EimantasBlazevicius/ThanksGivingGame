@@ -1,0 +1,15 @@
+{
+  "name": "christmas-2k18-game",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "https://mindaugas-jacionis.github.io/christmas-2k18-game",
+  "scripts": {
+    "clean": "rm -rf public build dist",
+    "build": "npm run clean && npx parcel build ./src/index.html --out-dir build --public-url ./ --no-source-maps",
+    "deploy": "npm run build && gh-pages -d build"
+  },
+  "devDependencies": {
+    "cssnano": "^4.1.8",
+    "gh-pages": "^2.0.1"
+  }
+}

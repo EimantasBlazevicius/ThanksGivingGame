@@ -23,7 +23,7 @@
   let time = 30;
 
   christmasTree.className = "Christmas-tree";
-  christmasTree.textContent = "👱";
+  christmasTree.textContent = "🧑";
 
   board.className = "Board";
 

@@ -1,4 +1,5 @@
 (function() {
+  var database = firebase.database();
   const app = document.getElementById("app");
   const christmasTree = document.createElement("div");
   const board = document.createElement("div");
@@ -22,6 +23,7 @@
   let allPresents = [];
   let loopTime = 0;
   let time = 30;
+  let nameValue = ""
 
   christmasTree.className = "Christmas-tree";
   christmasTree.textContent = "🧑";
@@ -59,6 +61,14 @@
   buttonUp.addEventListener("click", () => {});
   buttonDown.addEventListener("click", () => {});
 
+  function writeUserScore(name, score) {
+    database.ref('users/' + name).set({
+      username: name,
+      score: score,
+      order: 100000-score
+    });
+  }
+
   const checkCollision = currentPresent => {
     const horizontalCollision =
       currentPresent.offsetLeft <
@@ -79,10 +89,10 @@
     const currentPosition = christmasTree.offsetTop;
     let newPosition = currentPosition;
     if (direction === "up") {
-      newPosition = newPosition - 1.7;
+      newPosition = newPosition - 2;
     }
     if (direction === "down") {
-      newPosition = newPosition + 1.7;
+      newPosition = newPosition + 2;
     }
 
     christmasTree.style.top = `${newPosition}px`;
@@ -128,6 +138,47 @@
   };
 
   const finishGame = () => {
+    writeUserScore(nameValue, score)
+    //create table
+    const table = document.createElement("table")
+    table.className="table"
+    const thead = document.createElement("thead")
+    table.appendChild(thead)
+    //set one header
+    const tr = document.createElement("tr")
+    thead.appendChild(tr)
+
+    const th1 = document.createElement("th")
+    tr.appendChild(th1)
+    const head1 = document.createTextNode("Name")
+    th1.appendChild(head1)
+    //set second header
+    const th2 = document.createElement("th")
+    tr.appendChild(th2)
+    const head2 = document.createTextNode("Score")
+    th2.appendChild(head2)
+    
+    const tbody = document.createElement("tbody")
+    table.appendChild(tbody)
+    
+    var starCountRef = firebase.database().ref('users/').orderByChild("order");
+    starCountRef.on('value', function(snapshot) {
+      snapshot.forEach(user => {
+        const trBody = document.createElement("tr")
+        tbody.appendChild(trBody)
+        //Populating Name
+        const thBody1 = document.createElement("th")
+        trBody.appendChild(thBody1)
+        const th1Text = document.createTextNode(user.val().username)
+        thBody1.appendChild(th1Text)
+        //Populating Score
+        const thBody2 = document.createElement("th")
+        trBody.appendChild(thBody2)
+        const th2Text = document.createTextNode(user.val().score)
+        thBody2.appendChild(th2Text)
+
+      })
+    });
     const overlay = document.createElement("div");
     const restartButton = document.createElement("button");
     const finalScore = document.createElement("p");
@@ -135,16 +186,17 @@
 
     overlay.className = "Finish Overlay__column";
     overlay.appendChild(finalScore);
+    overlay.appendChild(table)
     overlay.appendChild(message);
     overlay.appendChild(restartButton);
 
     restartButton.type = "button";
     restartButton.textContent = "Restart";
-
+writeUserScore
     message.className = "Message";
     finalScore.textContent = `Your score: ${score}`;
     message.textContent =
-      "You are amazing! Happy holidays! Keep on rocking next year!";
+      "You are amazing "+ nameValue +"! Happy holidays! Keep on rocking next year!";
 
     app.appendChild(overlay);
 
@@ -171,7 +223,6 @@
         speed = 400
       }
       if (loopTime % speed === 0) {
-        console.log(speed)
         const newPresent = document.createElement("div");
         const topOffset = randomPosition();
 
@@ -196,18 +247,29 @@
   const renderStart = () => {
     const overlay = document.createElement("div");
     const startButton = document.createElement("button");
+    const name = document.createElement("input");
+    name.setAttribute("type", "text");
+    name.setAttribute("id", "name");
+    var br = document.createElement("br");
 
     overlay.className = "Overlay";
+    overlay.appendChild(name);
     overlay.appendChild(startButton);
-
+    
     startButton.type = "button";
     startButton.textContent = "Start";
 
     app.appendChild(overlay);
 
     startButton.addEventListener("click", () => {
-      overlay.remove();
-      startGame();
+      nameValue = document.getElementById("name").value
+      if(nameValue !== ""){
+        overlay.remove();
+        startGame();
+      }
+      else{
+        alert("Enter your name")
+      }
     });
   };
 

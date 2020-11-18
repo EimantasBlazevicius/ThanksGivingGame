@@ -10,12 +10,30 @@ body {
   font-family: "Courier New", Courier, monospace;
 }
 
+.table {
+  font-size: 4vh;
+  color: white;
+}
+thead {
+  color: red;
+}
+
 button {
   transition: all 0.3s ease-out;
   font-size: 44px;
   font-weight: 700;
   padding: 10px 30px;
   background: #fbbd05;
+  border-radius: 7px;
+  color: rgba(255, 255, 255, 0.8);
+  border-color: #fbbd05;
+  cursor: pointer;
+}
+#name {
+  transition: all 0.3s ease-out;
+  font-size: 44px;
+  font-weight: 700;
+  padding: 10px 30px;
   border-radius: 7px;
   color: rgba(255, 255, 255, 0.8);
   border-color: #fbbd05;

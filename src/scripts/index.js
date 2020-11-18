@@ -18,6 +18,7 @@
   let controlsInterval = -1;
   let gameInterval = -1;
   let score = 0;
+  let speed = 1000;
   let allPresents = [];
   let loopTime = 0;
   let time = 30;
@@ -78,10 +79,10 @@
     const currentPosition = christmasTree.offsetTop;
     let newPosition = currentPosition;
     if (direction === "up") {
-      newPosition = newPosition - 1;
+      newPosition = newPosition - 1.7;
     }
     if (direction === "down") {
-      newPosition = newPosition + 1;
+      newPosition = newPosition + 1.7;
     }
 
     christmasTree.style.top = `${newPosition}px`;
@@ -156,8 +157,21 @@
   const startGame = () => {
     gameInterval = setInterval(() => {
       loopTime += interval;
-
-      if (loopTime % 1000 === 0) {
+      if (score > 10 && score < 20){
+        speed = 900
+      }else if(score > 20 && score < 30){
+        speed = 800
+      }else if(score > 30 && score < 40){
+        speed = 700
+      }else if(score > 40 && score < 50){
+        speed = 600
+      }else if(score > 50 && score < 60){
+        speed = 500
+      }else if(score > 60 && score < 70){
+        speed = 400
+      }
+      if (loopTime % speed === 0) {
+        console.log(speed)
         const newPresent = document.createElement("div");
         const topOffset = randomPosition();
 
